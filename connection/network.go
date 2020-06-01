@@ -95,7 +95,7 @@ func (server Server) NewClientConnection(clientConnection *net.TCPConn) {
 		len := types.VarInt(0)
 		len.Read(newBuffer)
 		var fullBytesBuffer []byte
-		if int(len) < buflen {
+		if buflen >= int(len) {
 			fullBytesBuffer = buffer
 		} else {
 			fullBytesBuffer, err = types.ReadBytes(reader, int(len)-(buflen-1))
